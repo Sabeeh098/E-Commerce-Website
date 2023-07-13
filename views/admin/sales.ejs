@@ -1,0 +1,65 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+  <!-- Recent Sales Start -->
+  <div class="container-fluid pt-5 px-4">
+               
+    <div class="row pt-4 g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4" >
+                <form class="test">
+                    <h1>Sales</h1>
+                    <a href="" onclick="downloadPDF()" target="_blank" >Download Pdf</a>
+                    <div class="w-100 bg-black">
+                      <span class="">from :</span>
+                      <input id="from" name="from" type="date">
+                      <span class="">to :</span>
+                      <input id="to" name="to" type="date">
+                      <button type="submit" id="filterBtn">Filter</button>
+                    </div>
+                   
+                  </form>
+                  
+                  <table class="table" id="tabledata">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order ID</th>
+                        <th class="text-center" scope="col">Date</th>
+                        <th class="text-center" scope="col">status</th>
+                        <th class="text-center" scope="col">Method</th>
+                        <th class="text-center" scope="col">View</th>
+                        <th class="text-center" scope="col">Total Amount</th>
+                            
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% data.reverse().forEach((value,index)=>{ %>
+                            <tr>
+                                <td ><%= index+1 %></td>
+                                <td><%= value._id %></td>
+                                <td  class="text-center" ><%= value.Date.toISOString().substring(0,10) %></td>
+                                
+                                <td  class="text-center" ><a href="/admin/singleOrder?id=<%= value._id %>"><button class="btn btn-primary">view</button></a></td>
+                                <td  class="text-center" ><%= value.paymentMethod %></td>
+                                <td  class="text-center" ><%= value.status %></td>
+                                <td class="text-center" >$<%= value.totalAmount %></td>
+                                
+                        <% })%>
+                    </tbody>
+
+                </table>
+                <div class="w-100 d-flex justify-content-end">
+                    <span class="class me-5"> $<%= total%></span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <!-- Table End -->
+</div>
+<!-- Table End -->
+<%- include('../layout/adminLayout/adminfooter.ejs') %>

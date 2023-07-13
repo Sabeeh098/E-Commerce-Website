@@ -1,0 +1,156 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+<!-- <div class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Add Product</h6>
+        <form action="/admin/addProduct" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label  class="form-label">Product name</label>
+                <input type="String" class="form-control" name="name" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Images</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple name="images" accept="image/*">
+                <%
+                if(typeof message !== 'undefined'){
+                    %>
+                        <span><%=message%></span>
+                    <%
+                }
+                %>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Description</label>
+                <input type="String" class="form-control" name="description" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Price</label>
+                <input type="String" class="form-control" name="price" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Stock</label>
+                <input type="String" class="form-control" name="stock" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Category</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="category">
+                   <p>male</p>
+                   <p>female</p>
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div> -->
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="m-4">Edit Product</h3>
+        <div class="table-responsive">
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+              <form action="/admin/editProduct" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                  <label class="form-label">Product name</label>
+                  <input type="String" class="form-control" name="name" value="<%=product.productname%>">
+                  <input type="hidden" value="<%=product._id%>" name="id">
+                </div>
+                <!-- Container for existing images -->
+                <div class="row mt-4">
+                  <% for (var i = 0; i < product.image.length; i++) { %>
+                    <div class="col-md-3">
+                      <div class="card position-relative">
+                        <img src="/product_images/<%=product.image[i]%>" class="card-img-top" alt="Existing Image">
+                        <div class="card-body">
+                          <h5 class="card-title">Image <%= i + 1 %></h5>
+                        </div>
+                        <div class="image-icons">
+                          <div class="delete-icon">
+                            <a href="/admin/deleteimage?index=<%=i %>&productId=<%=product._id%>"><i class="mdi mdi-delete"></i></a> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+                <% if (typeof message !== 'undefined') { %>
+                <span><%=message%></span>
+                <% } %>
+                
+                <div class="mb-3">
+                  <label class="form-label">Images</label>
+                  <input class="form-control" type="file" id="formFileMultiple" multiple name="images" accept="image/*">
+                  <% if (typeof message !== 'undefined') { %>
+                  <span><%=message%></span>
+                  <% } %>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <input type="String" class="form-control" name="description" value="<%=product.description%>">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Price</label>
+                  <input type="String" class="form-control" name="price" value="<%=product.price%>">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Quantity</label>
+                  <input type="String" class="form-control" name="quantity" value="<%=product.quantity%>">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label mx-2">Category</label>
+                  <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="category">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+  .card {
+    position: relative;
+  }
+  
+  .card:hover .image-icons {
+    display: flex;
+  }
+  
+  .image-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .card:hover .image-icons {
+    display: flex;
+  }
+  
+  .image-icons .delete-icon {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .image-icons .delete-icon:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  </style>
+  
+<%- include('../layout/adminLayout/adminfooter.ejs') %>

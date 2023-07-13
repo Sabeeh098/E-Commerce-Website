@@ -1,0 +1,131 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+<div class="col-lg-10 grid-margin stretch-card">
+  <div class="card">
+      <div class="card-body">
+          <h2 class="card-title">USERS</h2>
+
+          <div class="table-responsive pt-3 container">
+              <table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th>
+                              NO:
+                          </th>
+                          <th>
+                              NAME
+                          </th>
+                          <th>
+                              EMAIL
+                          </th>
+                          <th>
+                              MOBILE
+                          </th>
+                          <th>
+                              ACTION
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% if(users.length > 0) {
+                          for(let i=0; i <users.length; i++){
+                          %>
+                      <tr>
+                          <td>
+                              <%= i+1 %>
+                          </td>
+                          <td>
+                              <%= users[i].name %>
+                          </td>
+                          <td>
+                              <%= users[i].email %>
+                          </td>
+                          <td>
+                              <%= users[i].number %>
+                          </td>
+                          <style>
+                            .confirmation-dialog {
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              height: 100%;
+                            }
+                          </style>
+                          
+                          <td style="height: 100%;">
+                            <% if(users[i].status) { %>
+                              <a class="text-danger block-user" href="/admin/userstatus?id=<%=users[i]._id%>"
+                                style="text-decoration: none;">
+                                Block
+                              </a>
+                            <% } else { %>
+                              <a class="text-success unblock-user" href="/admin/userstatus?id=<%=users[i]._id%>"
+                                style="text-decoration: none;">
+                                Unblock
+                              </a>
+                            <% } %>
+                          </td>
+                          
+                          <!-- Include SweetAlert library -->
+                          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                          
+                          <!-- Add JavaScript code to handle the click event -->
+                          <script>
+                            // Block user click event
+                            document.querySelectorAll('.block-user').forEach(function(element) {
+                              element.addEventListener('click', function(event) {
+                                event.preventDefault(); // Prevent the default link behavior
+                          
+                                // Show SweetAlert confirmation
+                                swal({
+                                  title: 'Are you sure?',
+                                  text: 'You want to block this user?',
+                                  icon: 'warning',
+                                  buttons: ['Cancel', 'Block'],
+                                  dangerMode: true,
+                                }).then(function(confirm) {
+                                  if (confirm) {
+                                    window.location.href = event.target.href; // Proceed with the link action
+                                  }
+                                });
+                              });
+                            });
+                          
+                            // Unblock user click event
+                            document.querySelectorAll('.unblock-user').forEach(function(element) {
+                              element.addEventListener('click', function(event) {
+                                event.preventDefault(); // Prevent the default link behavior
+                          
+                                // Show SweetAlert confirmation
+                                swal({
+                                  title: 'Are you sure?',
+                                  text: 'You want to unblock this user?',
+                                  icon: 'warning',
+                                  buttons: ['Cancel', 'Unblock'],
+                                  dangerMode: true,
+                                }).then(function(confirm) {
+                                  if (confirm) {
+                                    window.location.href = event.target.href; // Proceed with the link action
+                                  }
+                                });
+                              });
+                            });
+                          </script>
+                          
+                          
+                                                  
+                          
+                      </tr>
+                      <% } } else { %>
+                      <tr>
+                          <td colspan="4" class="alert alert-danger">Users Not Found</td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+  <%- include('../layout/adminLayout/adminfooter.ejs') %>

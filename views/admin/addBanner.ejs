@@ -1,0 +1,53 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Add Banner</h6>
+                <form action="/admin/addBanner" method="post" enctype="multipart/form-data">
+                    
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="exampleInputEmail1" class="form-label">Banner heading</label>
+                            <input type="string" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" name="heading" required>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="exampleInputEmail1" class="form-label">Description</label>
+                            <input type="string" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" name="discription" required>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="formFile" class="form-label mt-2">Image</label>
+                            <input class="form-control" type="file" id="formFile" name="image"
+                            multiple style="background: #fff;" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div>
+<!-- Content End -->
+
+
+<!-- Back to Top -->
+
+</div>
+
+
+<%- include('../layout/adminLayout/adminfooter.ejs') %>

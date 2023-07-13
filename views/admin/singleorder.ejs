@@ -1,0 +1,198 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+
+
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h5 class="mb-0">User </h5>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>Name : <%= userData.name %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Order Id : <%= uniqueId %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Email : <%= userData.email %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Number : <%= userData.number %></h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h5 class="mb-0">Delivery Address </h5>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>Name : <%= userData.name %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Number : <%= userData.number %></h6>
+                                </div>
+                               
+                                <div class="col-12">
+                                    <h6>Payment Method : <%= orderData.paymentMethod %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Address : <%= orderData.deliveryDetails %></h6>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <% if(orderData.status == "Return Rejected" || orderData.status == "Return Approved" ||orderData.status == "cancelled" || orderData.status == "Delivered"){%>
+                                            <h6>Status : <%= orderData.status %></h6>
+                                        <% }else if(orderData.status == "Return requested"){ %>
+                                            <div class="col-2 mt-3">
+                                                <h6>Status :</h6>
+                                            </div>
+                                            <div class="col-6">
+                                                <form action="/admin/updateStatus" method="post">
+                                                <input type="hidden" name="orderId" value="<%= orderData._id %>">
+                                                    <input type="hidden" name="productId" value="">
+                                                    <select class="form-select mt-2" name="status" id="floatingSelect"
+                                                    aria-label="Floating label select example" style="background: transparent; border: none; size: 10px;">
+                                                    <option selected disabled value=""><%= orderData.status %></option>
+                                                    
+                                                            <option>Return Rejected</option>
+                                                            <option>Return Approved</option>
+                                                           
+                                                    </select>   
+                                            </div>
+                                            <div class="col-4"> 
+                                                <button type="submit" class="btn btn-success m-2 ">Update</button>
+                                            </div>
+                                            </form>                                   
+                                        <%} else { %>
+                                            <div class="col-2 mt-3">
+                                                <h6>Status :</h6>
+                                            </div>
+                                            <div class="col-6">
+                                                <form action="/admin/updateStatus" method="post">
+                                                <input type="hidden" name="orderId" value="<%= orderData._id %>">
+                                                    <input type="hidden" name="productId" value="">
+                                                    <select class="form-select mt-2" name="status" id="floatingSelect"
+                                                    aria-label="Floating label select example" style="background: transparent; border: none; size: 10px;">
+                                                    <option selected disabled value=""><%= orderData.status %></option>
+                                                    
+                                                            <option>Shipped</option>
+                                                            <option>Placed</option>
+                                                            <option>Delivered</option>
+                                                            <option>cancelled</option>
+                                                           
+                                                    </select>   
+                                            </div>
+                                            <div class="col-4"> 
+                                                <button type="submit" class="btn btn-success m-2 ">Update</button>
+                                            </div>
+                                            </form>
+                                        <% } %>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Product Details</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">
+                                    
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% console.log(orderData); %>
+                                <% orderData.product.forEach((value,index)=>{%>
+                                    <tr>
+                                        <td><%=orderData.Date.toISOString().substring(0,10)%></td>
+                                        <td><%= value.productId.productname %></td>
+                                        <td><img  src="/product_images/<%= value.productId.image[0]%>" style="width: 50px;" alt=""></td>
+                                        <td><%= value.price * value.quantity %></td>
+                                        <td><%= value.quantity %></td>
+                                    </tr>
+                                <%}) %>
+                            </tbody>         
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Product Details</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-dark">
+
+                                <th scope="col">Date</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+
+
+
+                    </table>
+                </div>
+            </div> -->
+        </div>
+
+
+
+    </div>
+    <!-- Content End -->
+
+
+    <!-- Back to Top -->
+   
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('../layout/adminLayout/adminfooter.ejs') %>

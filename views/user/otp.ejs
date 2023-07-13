@@ -1,0 +1,42 @@
+<%- include('../layout/userLayout/userheader.ejs') %>
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row ">
+           
+            <div class="col-lg-6 " >
+                <div class="login_form_inner col-md-10 offset-md-7" >
+                    <h3>OTP LOGIN</h3>
+                    <form class="row login_form " action="/post-otp" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="name" name="otp" placeholder="Enter Otp" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Otp'" required>
+                        </div>
+                        
+                        <div class="col-md-12 form-group qwerty  d-flex justify-content-between">
+                            <button type="submit" value="submit" class="primary-btn m-2">Verify</button>
+                            <a href="/login" class="primary-btn m-2">Login</a>
+                        </div>
+                        
+                        <p>Email verified users please login</p>
+
+                        <%if(typeof message !== undefined){%>
+                            <p class="text-danger"><%=message%></p>
+                        <%}%>
+      
+
+                    </form>
+                      
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+
+
+
+
+<%- include('../layout/userLayout/userfooter.ejs') %>

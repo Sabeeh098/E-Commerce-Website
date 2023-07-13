@@ -1,0 +1,82 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+<!-- <div class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Add Product</h6>
+        <form action="/admin/addProduct" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label  class="form-label">Product name</label>
+                <input type="String" class="form-control" name="name" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Images</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple name="images" accept="image/*">
+                <%
+                if(typeof message !== 'undefined'){
+                    %>
+                        <span><%=message%></span>
+                    <%
+                }
+                %>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Description</label>
+                <input type="String" class="form-control" name="description" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Price</label>
+                <input type="String" class="form-control" name="price" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Stock</label>
+                <input type="String" class="form-control" name="stock" >
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Category</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="category">
+                   <p>male</p>
+                   <p>female</p>
+
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div> -->
+
+
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="m-4">Add Category</h3>
+        <div class="table-responsive">
+         
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+            
+            <form action="/admin/addCategory" method="post" >
+                <div class="mb-3">
+                    <label  class="form-label">Category name</label>
+                    <input type="String" class="form-control" name="name" >
+                </div>
+                
+                
+                
+                
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+                </div>
+            </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<%- include('../layout/adminLayout/adminfooter.ejs') %>

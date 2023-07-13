@@ -1,0 +1,72 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+<div class="col-lg-10">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="mb-4">Products</h3>
+      <a href="/admin/addProducts"><button class="btn btn-outline-dark mb-4">Add Product</button></a>
+        <div class="table-responsive">
+          
+
+          <table class="table" id="categorytable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                    
+                </tr>
+            </thead>
+            <style>
+          .tooltip {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Adjust the value based on your needs */
+}
+
+
+            </style>
+            <tbody>
+                <% products.forEach(function(product,index){%>
+                  <% console.log(products+"dfghjhgfdwerfgfdfghjhgf"); %>
+                    <tr>
+                        <td scope="row"><%=index+1 %></td>
+                        <td class="<%= product.productname.length > 50 ? 'tooltip' : '' %>" title="<%= product.productname %>"><%= product.productname %></td>         
+                        <td><img src="/product_images/<%=product.image[0]%>" width="100px" height="120px" alt="<%= product.image %>">
+                        </td>
+                        
+                        <td><%= product.category?.name %></td>
+                        <td><%= product.quantity%></td>
+                        <% console.log(products.quantity); %>
+
+                        <td><%= product.price %></td>
+                        
+                        <td><a href="/admin/editProduct?id=<%= product._id %>"><button class="btn btn-danger">Edit</button></a></td>
+                        <td>
+                          <% console.log(product.delete); %>
+                             <% if (!product.deleted ){%>
+                                <a href="/admin/deleteProduct?id=<%= product._id %>"><button role="button"  class="btn btn-outline-primary" >Restore</button></a>
+                               
+                         <%}else{%>
+                            <a href="/admin/deleteProduct?id=<%= product._id %>"><button role="button"  class="btn btn-outline-primary" onclick="return confirm('Are you sure you want to delete this product?');" >Delete</button></a>
+
+                             <%}%> 
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <%- include('../layout/adminLayout/adminfooter.ejs') %>

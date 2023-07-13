@@ -1,0 +1,159 @@
+<%- include('../layout/userLayout/userheader.ejs')%>
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>User profile</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="cart">Cart</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <div class="container-xl px-4 mt-5">
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <!-- Profile picture image-->
+                        <img class="img-account-profile rounded-circle mb-2"
+                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <!-- Profile picture help block-->
+                        <div class="small font-italic text-muted mb-4"></div>
+                        <!-- Profile picture upload button-->
+                        <button class="btn btn-dark btn-lg" type="button">Upload new image</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Full Name</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0"><%= data.name %></p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Email</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0"><%= data.email %></p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Phone</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0"><%= String(data.number) %></p>
+
+                        
+                      </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Address</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <% data.address.forEach(function(address) { %>
+                            <p class="text-muted mb-0">
+                              <%= address.name %>, <%= address.phone %>, <%= address.town %>,<%= address.street %>
+                            </p>
+                          <% }); %>
+                        </div>
+                      </div>
+                      
+                  </div>
+                </div>
+               
+           
+                
+              </button>
+
+
+
+
+ <!-- Account details card-->
+ <div class="card mb-4">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+        <h5 class="text-start wallet mb-3">Wallet :₹<%= data.wallet %> 
+        </h5>
+        <form action="/update-profile" method="post" class="d-flex">
+            <div class="col-7">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" name="name" class="input" value="<%= data.name %>"
+                                    required>
+                                <input type="hidden" name="id" value="">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="email" name="email" class="input" value="<%= data.email %>"
+                                    required>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="number" name="mobile" class="input"
+                                    value="<%= String(data.number) %>" required>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button type="submit" class="site-btn">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 border">
+                <h4 class="wallet mt-2">Wallet history:-</h4>
+                             
+                                <!-- <h6 class="wall mt-3">date:-<span></span></h6> -->
+                                <h6>Amount:- <span><%= data.wallet %></span></h6>
+                              
+             
+            </div>
+        </form>
+    </div>
+</div>
+        </div>
+    </div>
+    <!--================End Cart Area =================-->
+
+    <%- include('../layout/userLayout/userfooter.ejs')%>

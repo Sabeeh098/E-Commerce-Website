@@ -1,0 +1,55 @@
+<%- include('../layout/adminLayout/adminheader.ejs') %>
+<%- include('../layout/adminLayout/adminnav.ejs') %>
+
+
+<div class="col-lg-10">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="mb-4">Orders</h3>
+      <a href="/admin/listorders"><button class="btn btn-outline-dark mb-4"></button></a>
+        <div class="table-responsive">
+          
+
+          <table class="table" id="categorytable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Method</th>
+                <th scope="col">status</th>
+                <th scope="col">View</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+              <% if(orderData){%>
+                <% console.log(orderData); %>
+              <%  orderData.reverse().forEach((order, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= order.Date.toISOString().substring(0, 10) %></td>
+                  <td> <%=order.orderId%></td>
+                  <td>  <%= order.totalAmount %></td>
+                  <td>
+                    <%= order.paymentMethod %>
+                </td>
+                <td>
+                  <%= order.status %>
+              </td>
+              <td><a href="/admin/singleorder?id=<%= order._id %>"><button
+                class="btn btn-primary">view</button></a></td>
+                </tr>
+              <% }); %>
+<%}%>
+            </tbody>
+        </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <%- include('../layout/adminLayout/adminfooter.ejs') %>

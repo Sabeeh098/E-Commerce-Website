@@ -1,0 +1,108 @@
+<%- include('../layout/userLayout/userheader.ejs') %>
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="user/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                        <a class="primary-btn" href="/signup">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>CREATE YOUR ACCOUNT</h3>
+                    <form class="row login_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="phone" name="number" placeholder="Phone Number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'" required>
+                        </div>
+                        <!-- <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option2" name="selector">
+                                <label for="f-option2">Keep me logged in</label>
+                            </div>
+                        </div> -->
+                        <div class="col-md-12 form-group qwerty">
+                            <button type="submit" value="submit" class="primary-btn">signup</button>
+                            <!-- <a href="#">Forgot Password?</a> -->
+                        </div>
+
+                        <% if (typeof message !== 'undefined') { %>
+                            <p>
+                                <%= message %>
+                            </p>
+                        <% } %>
+
+                    </form>
+                      
+                      <script>
+                        document.getElementById('contactForm').addEventListener('submit', function(event) {
+                          event.preventDefault();
+                      
+                          // Retrieve form input values
+                          var username = document.getElementById('name').value;
+                          var email = document.getElementById('email').value;
+                          var phone = document.getElementById('phone').value;
+                          var password = document.getElementById('password').value;
+                          var confirmpassword = document.getElementById('confirmpassword').value;
+                          
+                      
+                          // Perform validation checks
+                          if (username === '' || username.trim() !== username) {
+                                alert('Username is required');
+                            }
+                          else if (email === '' || email.trim() !== email) {
+                            alert('Email is required');
+                            
+                          }
+                          else if (phone === '' || phone.trim() !== phone) {
+                            alert('Phone number is required');
+                            
+                          }
+                      
+                      
+                          else if (password === '') {
+                            alert('Password is required');
+                        
+                          }
+                          else if (password !== confirmpassword) {
+                            alert('password not match');
+                          }else {
+                            // Validation passed, submit the form
+                                document.getElementById('contactForm').submit();
+                            }
+                      
+                          // Validation passed, proceed with form submission or AJAX request
+                          // ...
+                        });
+                      </script>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+
+
+
+
+<%- include('../layout/userLayout/userfooter.ejs') %>
