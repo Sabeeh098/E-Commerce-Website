@@ -426,6 +426,7 @@ const report = async (req, res) => {
     await page.goto("http://localhost:3000/salesReport", {
       waitUntil: "networkidle2",
     });
+    console.log("haiiiiiiiiiiiiiiiiiiiiii");
     await page.setViewport({ width: 1680, height: 1050 });
     const todayDate = new Date();
     const pdfn = await page.pdf({
