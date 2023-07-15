@@ -2,6 +2,7 @@ const User = require("../model/userModel");
 const Product = require("../model/productModel");
 const Category = require("../model/categoryModel");
 const Order = require("../model/orderModel");
+const puppeteer = require('puppeteer');
 
 const bcrypt = require("bcrypt");
 
@@ -417,6 +418,40 @@ const sales = async (req, res) => {
   }
 };
 
+
+const report = async (req, res) => {
+  try {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto("http://localhost:3000/salesReport", {
+      waitUntil: "networkidle2",
+    });
+    await page.setViewport({ width: 1680, height: 1050 });
+    const todayDate = new Date();
+    const pdfn = await page.pdf({
+      path: `${path.join(
+        __dirname,
+        "../public/files",
+        todayDate.getTime() + ".pdf"
+      )}`,
+      format: "A4",
+    });
+    await browser.close();
+    const pdfUrl = path.join(
+      __dirname,
+      "../public/files",
+      todayDate.getTime() + ".pdf"
+    );
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Length": pdfn.length,
+    });
+    res.sendFile(pdfUrl);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 // ...delete product image ...\\
 const deleteImage = async (req, res) => {
   try {
@@ -457,5 +492,6 @@ module.exports = {
   deleteCategory,
   getSalesReport,
   sales,
-  deleteImage
+  deleteImage,
+  report
 };

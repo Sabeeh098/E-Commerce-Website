@@ -102,6 +102,8 @@ admin_Route.post('/addBanner',sessionAdmin.logged,upload.single('image'),bannerC
 ///sales report
 admin_Route.get("/salesreport",sessionAdmin.logged,adminController.getSalesReport)
 admin_Route.get("/sales",sessionAdmin.logged,adminController.sales)
+admin_Route.get("/report",sessionAdmin.logged,adminController.report);
+
 
 
 

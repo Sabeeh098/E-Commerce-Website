@@ -6,7 +6,8 @@
   <div class="container">
     <div class="title">
       <h1>Sales Report</h1>
-      <a href="" onclick="downloadPDF()" target="_blank">Download Pdf</a>
+      <a href="" onclick="downloadPDF()" target="_blank" >Download Pdf</a>
+
     </div>
     
     <div class="info">
@@ -45,6 +46,19 @@
   <!-- Table End -->
 </div>
 <!-- Table End -->
+
+<script>
+  function downloadPDF() {
+    var details = document.getElementById("categorytable");
+    var newWin = window.open('', 'Print-Window');
+    newWin.document.open();
+    newWin.document.write('<html><head><style>@media print { @page { size: A4; margin: 0; } }</style></head><body>');
+    newWin.document.write(details.outerHTML);
+    newWin.document.write('</body></html>');
+    newWin.document.close();
+    setTimeout(function () { newWin.print(); }, 10);
+  }
+</script>
 
 
 <%- include('../layout/adminLayout/adminfooter.ejs') %>
