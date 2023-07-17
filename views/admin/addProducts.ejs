@@ -56,50 +56,60 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
             
-                <form action="/admin/addProducts" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                    <label  class="form-label">Product name</label>
-                    <input type="String" class="form-control" name="name" >
-                     </div>
-                     <div class="mb-3">
-                    <label  class="form-label">Images</label>
-                    <input class="form-control" type="file" id="formFileMultiple" multiple name="images" accept="image/*">
-                    <%
-                    if(typeof message !== 'undefined'){
-                        %>
-                            <span><%=message%></span>
-                        <%
-                    }
-                    %>
-                         </div>
-                    <div class="mb-3">
-                    <label  class="form-label">Description</label>
-                    <input type="String" class="form-control" name="description" >
-                    </div>
-                    <div class="mb-3">
-                    <label  class="form-label">Price</label>
-                    <input type="String" class="form-control" name="price" >
-                    </div>
-                    <div class="mb-3">
-                        <label  class="form-label">Quantity</label>
-                        <input type="String" class="form-control" name="quantity" >
+                    <form action="/admin/addProducts" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        <div class="mb-3">
+                          <label class="form-label">Product name</label>
+                          <input type="text" class="form-control" name="name" required>
                         </div>
-                    <div class="mb-3">
-                            <label  class="form-label mx-2">Category</label>
-                        <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="category">
-                           <option value="male">male</option>
+                        <div class="mb-3">
+                          <label class="form-label">Images</label>
+                          <input class="form-control" type="file" id="formFileMultiple" multiple name="images" accept="image/*" required>
+                          <span class="error-message"></span>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Description</label>
+                          <input type="text" class="form-control" name="description" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Price</label>
+                          <input type="text" class="form-control" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Quantity</label>
+                          <input type="text" class="form-control" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label mx-2">Category</label>
+                          <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" name="category" required>
+                            <option value="male">male</option>
                             <option value="female">female</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
-               </form>
+                          </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </form>
                 </div>
-             </div>
-        </div>
+            </div>
+        
+            </div>
       
     </div>
     </div>
 </div>
   </div>
 </div>
+<script>
+    function validateForm() {
+      const imagesInput = document.getElementById('formFileMultiple');
+      const errorMessage = document.querySelector('.error-message');
+      
+      // Check if file input is empty
+      if (imagesInput.value === '') {
+        errorMessage.textContent = 'Please select an image.';
+        errorMessage.style.color = 'red';
+        return false; // Prevent form submission
+      }
+      
+      return true; // Allow form submission
+    }
+  </script>
 <%- include('../layout/adminLayout/adminfooter.ejs') %>
