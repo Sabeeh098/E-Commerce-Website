@@ -2,7 +2,7 @@ const User = require("../model/userModel");
 const Product = require("../model/productModel");
 const Category = require("../model/categoryModel");
 const Order = require("../model/orderModel");
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
 
 const bcrypt = require("bcrypt");
 
@@ -245,7 +245,7 @@ const getEditProduct = async (req, res) => {
   }
 };
 
-  /////post edit product////
+/////post edit product////
 const postEditProduct = async (req, res) => {
   try {
     const id = req.body.id;
@@ -418,7 +418,6 @@ const sales = async (req, res) => {
   }
 };
 
-
 const report = async (req, res) => {
   try {
     const browser = await puppeteer.launch();
@@ -457,7 +456,7 @@ const report = async (req, res) => {
 const deleteImage = async (req, res) => {
   try {
     const productId = req.query.productId;
-    
+
     const index = req.query.index;
     const deletedImage = await Product.updateOne(
       { _id: productId },
@@ -494,5 +493,5 @@ module.exports = {
   getSalesReport,
   sales,
   deleteImage,
-  report
+  report,
 };
