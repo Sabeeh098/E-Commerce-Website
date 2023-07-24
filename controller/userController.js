@@ -241,7 +241,9 @@ const userlogout = async (req, res, next) => {
 const productspage = async (req, res) => {
   try {
     const category = req.query.category?{category:req.query.category}:{};
+    console.log(category)
     const products = await Product.find(category).populate("category");
+    console.log(products.length)
     if (req.session.user) {
       const user = await User.findById(req.session.user);
       res.render("products", { products, message: "user", user });
